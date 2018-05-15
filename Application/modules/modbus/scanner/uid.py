@@ -20,7 +20,8 @@ class Module:
 		'RPORT'		:[502		,False	,'The port number for modbus protocol'],
 		'Function'	:[1		,False	,'Function code, Defualt:Read Coils.'],
 		'Threads'	:[1		,False	,'The number of concurrent threads'],
-		'Output'	:[True		,False	,'The stdout save in output directory']
+		'Output'	:[True		,False	,'The stdout save in output directory'],
+		'MaxUID'        :[255           ,False  ,'The maximum UID to check']
 	}	
 	output = ''
 
@@ -56,7 +57,7 @@ class Module:
 
 	def do(self,ip):
 		self.printLine('[+] Start Brute Force UID on : ' + ip,bcolors.OKGREEN)
-		for i in range(1,255): # Total of 255 (legal) uid
+		for i in range(1,self.options['MaxUID'][0]): # Total of 255 (legal) uid
 			c = connectToTarget(ip,self.options['RPORT'][0])
 			if(c == None):
 				break
