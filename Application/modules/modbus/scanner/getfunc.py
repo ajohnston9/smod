@@ -21,7 +21,8 @@ class Module:
 		'UID'		:[None		,True	,'Modbus Slave UID.'],
 		'Threads'	:[1		,False	,'The number of concurrent threads'],
 		'Output'	:[True		,False	,'The stdout save in output directory'],
-		'MaxFunc'       :[256           ,False  , 'The maximum function number to check']
+		'MaxFunc'       :[256           ,False  , 'The maximum function number to check'],
+		'Verbose'       :[True          ,False  , 'Enable verbose output. If false, only valid codes shown,']
 	}	
 	output = ''
 
@@ -84,7 +85,8 @@ class Module:
 						self.printLine("[+] Function Code "+str(i)+" is supported.",bcolors.OKGREEN)
 						
 			else:
-				self.printLine("[+] Function Code "+str(i)+" likely not supported supported, received invalid response.",bcolors.OKGREEN)
+				if self.options['Verbose'][0]:
+					self.printLine("[+] Function Code "+str(i)+" likely not supported supported, received invalid response.",bcolors.OKGREEN)
 				
 
 		
