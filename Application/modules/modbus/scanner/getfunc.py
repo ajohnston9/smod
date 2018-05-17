@@ -84,7 +84,7 @@ class Module:
 						self.printLine("[+] Function Code "+str(i)+" is supported.",bcolors.OKGREEN)
 						
 			else:
-				self.printLine("[+] Function Code "+str(i)+" probably supported.",bcolors.OKGREEN)
+				self.printLine("[+] Function Code "+str(i)+" likely not supported supported, received invalid response.",bcolors.OKGREEN)
 				
 
 		
