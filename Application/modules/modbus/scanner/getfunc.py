@@ -20,7 +20,8 @@ class Module:
 		'RPORT'		:[502		,False	,'The port number for modbus protocol'],
 		'UID'		:[None		,True	,'Modbus Slave UID.'],
 		'Threads'	:[1		,False	,'The number of concurrent threads'],
-		'Output'	:[True		,False	,'The stdout save in output directory']
+		'Output'	:[True		,False	,'The stdout save in output directory'],
+		'MaxFunc'       :[256           ,False  , 'The maximum function number to check']
 	}	
 	output = ''
 
@@ -60,7 +61,7 @@ class Module:
 			self.printLine('[-] Modbus is not running on : ' + ip,bcolors.WARNING)
 			return None
 		self.printLine('[+] Looking for supported function codes on ' + ip,bcolors.OKGREEN)
-		for i in range(0,256): # Total of 127 (legal) function codes
+		for i in range(0, int(self.options['MaxFunc'][0])): # Total of 127 (legal) function codes
 			ans = c.sr1(ModbusADU(transId=getTransId(),unitId=int(self.options['UID'][0]))/ModbusPDU_Read_Generic(funcCode=i),timeout=timeout, verbose=0)
 	
 			# We are using the raw data format, because not all function
