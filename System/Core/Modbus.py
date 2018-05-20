@@ -414,9 +414,8 @@ def connectToTarget(IP="127.0.0.1",port=modport):
 		s.connect((IP,int(port))) # encapsulate into try/catch
 		connection = StreamSocket(s,Raw)
 		return connection
-	except Exception,e:
-		print "Connection unsuccessful due to the following error :"
-		print e.message
+	except socket.error, e:
+		print "Connection unsuccessful due to the following error : %s" % (e)
 		return None
 def closeConnectionToTarget(c):
 	global connection
